@@ -85,7 +85,7 @@ const TemplateOptions = ({ selectedTemplate, setSelectedTemplate }) => {
             <Loader2 className="h-6 w-6 animate-spin text-gray-500" />
           </div>
         ) : templates?.length ? (
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 cursor-pointer">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 cursor-pointer">
             {templates.map((template) => (
               <div
                 key={template.id}
@@ -100,13 +100,17 @@ const TemplateOptions = ({ selectedTemplate, setSelectedTemplate }) => {
                 className="rounded-lg border bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
               >
                 <div className="flex items-start justify-between">
-                  <p className="font-semibold text-gray-900 truncate">
-                    {template.template_name}
-                  </p>
-
-                  <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium capitalize text-gray-600">
-                    {template.channel}
-                  </span>
+                  <div className="flex justify-between gap-6">
+                    <div className="flex gap-3 items-start">
+                      <p className="font-semibold text-gray-900 truncate">
+                        {template.template_name}
+                      </p>
+                      <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-medium capitalize text-gray-600">
+                        {template.channel}
+                      </span>
+                    </div>
+                    <p className="text-xs">{template.id}</p>
+                  </div>
                 </div>
 
                 <p className="mt-4 text-xs text-gray-500">

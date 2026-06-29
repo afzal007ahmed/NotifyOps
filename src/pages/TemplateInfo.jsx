@@ -61,7 +61,7 @@ const TemplateInfo = () => {
       <Card>
         <CardHeader className="border-b">
           <CardTitle className="text-2xl">{data.data.template_name}</CardTitle>
-
+          <p>{ data.data.id }</p>
           <p className="text-sm text-gray-500 mt-2">
             Created on {new Date(data.data.createdAt).toLocaleString()}
           </p>
