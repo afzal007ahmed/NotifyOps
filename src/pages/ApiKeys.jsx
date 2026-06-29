@@ -79,6 +79,12 @@ const ApiKeys = () => {
       );
       fetchApiKeys();
       toast.success("key is deleted successfully.");
+    } else if (option === "make_active") {
+      await axiosInterceptor.delete(
+        api.projects + api.api_keys + id + "/make-active",
+      );
+      fetchApiKeys();
+      toast.success("key is activated successfully.");
     }
   }
   const role = userData.dataValues.role;
@@ -123,10 +129,7 @@ const ApiKeys = () => {
         <TableBody>
           {!apiKeysLoader &&
             apikeys?.map((item) => (
-              <TableRow
-                key={item.id}
-                className={`${item.status === "revoked" && "opacity-[0.4]"}`}
-              >
+              <TableRow key={item.id}>
                 <TableCell className="font-mono">
                   {item.api_key || item.hash_key}
                 </TableCell>
@@ -135,34 +138,41 @@ const ApiKeys = () => {
                   {new Date(item.created_at).toLocaleString()}
                 </TableCell>
                 <TableCell>
-                  {item.status !== "revoked" && (
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <button className="p-2 rounded-md hover:bg-gray-100 transition">
-                          <MoreHorizontal className="w-5 h-5 cursor-pointer" />
-                        </button>
-                      </PopoverTrigger>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <button className="p-2 rounded-md hover:bg-gray-100 transition">
+                        <MoreHorizontal className="w-5 h-5 cursor-pointer" />
+                      </button>
+                    </PopoverTrigger>
 
-                      <PopoverContent className="w-40 p-1">
-                        <div className="flex flex-col">
-                          {apiKeyMoreOptions.map((option) => (
-                            <button
-                              disabled={disable}
-                              key={option}
-                              onClick={() => handleOptions(option , item.id )}
-                              className={`text-left px-3 py-2 text-sm rounded-md transition hover:bg-gray-100 ${
-                                option === "delete"
-                                  ? "text-red-600 hover:bg-red-50"
-                                  : ""
-                              } ${disable ? "opacity-[0.4]" : "opacity-[1]"} `}
-                            >
-                              {option}
-                            </button>
-                          ))}
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  )}
+                    <PopoverContent className="w-40 p-1">
+                      <div className="flex flex-col">
+                        {apiKeyMoreOptions.map((option) => (
+                          <button
+                            disabled={disable}
+                            key={option}
+                            onClick={() =>
+                              handleOptions(
+                                item.status === "revoked"
+                                  ? "make_active"
+                                  : option,
+                                item.id,
+                              )
+                            }
+                            className={`text-left px-3 py-2 text-sm rounded-md transition hover:bg-gray-100 ${
+                              option === "delete"
+                                ? item.status === "revoked"
+                                  ? "text-green-500 hover:bg-green-100"
+                                  : "text-red-600 hover:bg-red-50"
+                                : ""
+                            }`}
+                          >
+                            {item.status === "revoked" ? "Make active" : option}
+                          </button>
+                        ))}
+                      </div>
+                    </PopoverContent>
+                  </Popover>
                 </TableCell>
                 {item.status === "revoked" && (
                   <TableCell>

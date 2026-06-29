@@ -1,12 +1,12 @@
 export const api = {
-  login: "auth/login",
-  register: "auth/signup",
-  me : "auth/me",
-  projects : 'projects/',
-  subscriptions : 'subscriptions/',
-  organisation : "organisations/",
+  login: "v1/auth/login",
+  register: "v1/auth/signup",
+  me : "v1/auth/me",
+  projects : 'v1/projects/',
+  subscriptions : 'v1/subscriptions/',
+  organisation : "v1/organisations/",
   api_keys : 'api-keys/',
-  template : "templates/",
-  logs : '/logs',
+  template : "v1/templates/",
+  logs : 'v1/logs',
   usage: 'usage/'
 };
