@@ -159,15 +159,15 @@ const ApiKeys = () => {
                                 item.id,
                               )
                             }
-                            className={`text-left px-3 py-2 text-sm rounded-md transition hover:bg-gray-100 ${
-                              option === "delete"
-                                ? item.status === "revoked"
-                                  ? "text-green-500 hover:bg-green-100"
-                                  : "text-red-600 hover:bg-red-50"
+                            className={`text-left px-3 py-2 text-sm rounded-md cursor-pointer transition hover:bg-gray-100 ${
+                              option === "revoke"
+                                ? item.status === "revoked" 
+                                  ? "hover:text-green-600 hover:bg-green-100"
+                                  : "hover:text-red-600 hover:bg-red-50"
                                 : ""
-                            }`}
+                            } ${ option === "delete" && "hover:bg-red-100 hover:text-red-600"}`}
                           >
-                            {item.status === "revoked" ? "Make active" : option}
+                            {item.status === "revoked" && option === "revoke" ? "Make active" : option}
                           </button>
                         ))}
                       </div>
